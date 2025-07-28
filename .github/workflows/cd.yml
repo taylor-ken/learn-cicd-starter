@@ -20,3 +20,15 @@ jobs:
 
       - name: Build App
         run: scripts/buildprod.sh
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+        with:
+          version: '>= 363.0.0'
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+          
+      - name: 'Use gcloud CLI'
+        run: 'gcloud info'
+
+      - name: 'Build Docker image'
+        run: 'gcloud builds submit --tag us-central1-docker.pkg.dev/leafy-racer-467315-r7/notely-ar-repo/notely:ver${{ github.sha }} .'
