@@ -37,7 +37,6 @@ jobs:
         with:
           version: '>= 363.0.0'
           
-          
       - name: 'Use gcloud CLI'
         run: 'gcloud info'
 
@@ -46,6 +45,6 @@ jobs:
 
       - name: 'Run the migration'
         run: './scripts/migrateup.sh'
-        
+
       - name: Deploy to Cloud Run
         run: gcloud run deploy notely --image us-central1-docker.pkg.dev/leafy-racer-467315-r7/notely-ar-repo/notely:ver${{ github.sha }} --region us-central1 --allow-unauthenticated --project leafy-racer-467315-r7 --max-instances=4
